@@ -3,28 +3,12 @@ package handlers
 import (
 	"net/http"
 
+	"Oratio/models"
 	"Oratio/services"
+	"encoding/json"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 )
-
-func GetSessionHandler(c *gin.Context) {
-	idStr := c.Param("id")
-	id, err := uuid.Parse(idStr)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid session ID"})
-		return
-	}
-
-	session, err := services.GetSession(id.String()) // ✅ convert UUID to string
-	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Session not found"})
-		return
-	}
-
-	c.JSON(http.StatusOK, session)
-}
 
 func GenerateHandler(c *gin.Context) {
 	paper := c.PostForm("paper")
@@ -34,4 +18,28 @@ func GenerateHandler(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"result": result})
+}
+
+func GenerateAndStore(c *gin.Context) {
+	paper := c.PostForm("paper")
+
+	result, err := services.Gemini(paper)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "Gemini failed"})
+		return
+	}
+
+	var questions []models.Question
+	if err := json.Unmarshal(result.Questions, &questions); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to parse questions"})
+		return
+	}
+
+	session, err := services.SaveSession(result.Speech, questions)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "DB insert failed"})
+		return
+	}
+
+	c.JSON(200, session)
 }

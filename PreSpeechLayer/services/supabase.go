@@ -38,7 +38,7 @@ func InitDatabase() {
 	err = db.AutoMigrate(
 		&models.Session{},
 		&models.Question{},
-		&models.NPCPrompt{},
+		
 	)
 	if err != nil {
 		log.Fatalf("❌ Migration failed: %v", err)

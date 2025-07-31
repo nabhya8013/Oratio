@@ -3,45 +3,36 @@ package services
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 
+	"Oratio/models"
 	"strings"
 
 	"google.golang.org/genai"
 )
 
-type Question struct {
-	NpcID int    `json:"npc_id"`
-	Text  string `json:"text"`
-}
+func ParseGeminiResult(raw string) (*models.Session, error) {
+	raw = strings.TrimSpace(raw)
 
-type SpeechData struct {
-	Speech    string     `json:"speech"`
-	Questions []Question `json:"questions"`
-}
-
-func ParseGeminiResult(raw string) (*SpeechData, error) {
+	// Try to extract from ```json ... ```
 	start := strings.Index(raw, "```json")
 	end := strings.LastIndex(raw, "```")
 
-	if start == -1 || end == -1 || end <= start {
-		return nil, errors.New("invalid JSON block")
+	if start != -1 && end != -1 && end > start {
+		raw = raw[start+7 : end] // skip "```json"
+		raw = strings.TrimSpace(raw)
 	}
 
-	jsonString := raw[start+7 : end] // skip "```json\n"
-	jsonString = strings.TrimSpace(jsonString)
-
-	var result SpeechData
-	if err := json.Unmarshal([]byte(jsonString), &result); err != nil {
+	var result models.Session
+	if err := json.Unmarshal([]byte(raw), &result); err != nil {
 		return nil, err
 	}
 
 	return &result, nil
 }
 
-func Gemini(PaperBody string) (*SpeechData, error) {
+func Gemini(PaperBody string) (*models.Session, error) {
 	ctx := context.Background()
 	// The client gets the API key from the environment variable `GEMINI_API_KEY`.
 	client, err := genai.NewClient(ctx, nil)

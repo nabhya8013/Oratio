@@ -1,25 +1,18 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/datatypes"
+)
 
 type Session struct {
-	ID          string     `gorm:"primaryKey" json:"id"`
-	CreatedAt   time.Time  `json:"created_at"`
-	Title       string     `json:"title"`
-	GeneratedBy string     `json:"generated_by"`
-	SpeechText  string     `json:"speech_text"`
-	Questions   []Question `gorm:"-" json:"questions"` // Ignored by GORM unless you want to model a relation
-}
-
-type GeminiResponse struct {
-	SessionID string      `json:"session_id"`
-	Speech    string      `json:"speech"`
-	Questions []NPCPrompt `json:"questions"`
-}
-
-type NPCPrompt struct {
-	NPCID int    `json:"npc_id"`
-	Text  string `json:"text"`
+	ID          uint           `gorm:"primaryKey" json:"id"`
+	Speech      string         `json:"speech"`
+	Questions   datatypes.JSON `json:"questions"` // store JSON array
+	CreatedBy   string         `json:"created_by"`
+	GeneratedBy string         `json:"generated_by"`
+	CreatedAt   time.Time      `json:"created_at"`
 }
 
 type Question struct {
