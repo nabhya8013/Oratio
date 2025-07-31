@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 
 	"Oratio/models"
@@ -72,7 +71,7 @@ func Gemini(PaperBody string) (*models.Session, error) {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Speech:", parsed.Speech)
+	//fmt.Println("Speech:", parsed.Speech)
 
 	return parsed, err
 }

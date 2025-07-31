@@ -8,5 +8,5 @@ import (
 
 func RegisterRoutes(r *gin.Engine) {
 	r.POST("/generate", handlers.GenerateAndStore)
-	//r.GET("/session/:id", handlers.GetSessionHandler)
+	r.GET("/session", handlers.GetSessionByQuery) // GET /session?id=2
 }

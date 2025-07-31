@@ -28,3 +28,11 @@ func SaveSession(speech string, questions []models.Question) (*models.Session, e
 
 	return &session, nil
 }
+
+func GetSessionByID(id uint) (*models.Session, error) {
+	var session models.Session
+	if err := DB.First(&session, id).Error; err != nil {
+		return nil, err
+	}
+	return &session, nil
+}
