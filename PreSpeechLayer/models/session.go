@@ -1,21 +1,35 @@
 package models
 
-import (
-	"time"
-
-	"gorm.io/datatypes"
-)
-
 type Session struct {
-	ID          uint           `gorm:"primaryKey" json:"id"`
-	Speech      string         `json:"speech"`
-	Questions   datatypes.JSON `json:"questions"` // store JSON array
-	CreatedBy   string         `json:"created_by"`
-	GeneratedBy string         `json:"generated_by"`
-	CreatedAt   time.Time      `json:"created_at"`
+    AudioPath      string
+    StartTime      string
+    Transcription  string
+    PitchMean      float64
+    PitchStd       float64
+    RMSMean        float64
+    RMSStd         float64
+    EmotionLabel   string
+    EmotionScore   float64
+    SimilarityScore float64
 }
 
-type Question struct {
-	NPCID int    `json:"npc_id"`
-	Text  string `json:"text"`
+type VADResult struct {
+    StartTime    string `json:"start_time"`
+    Transcription string `json:"transcription"`
+}
+
+type FeatureResult struct {
+    PitchMean float64 `json:"pitch_mean"`
+    PitchStd  float64 `json:"pitch_std"`
+    RMSMean   float64 `json:"rms_mean"`
+    RMSStd    float64 `json:"rms_std"`
+}
+
+type SERResult struct {
+    Label string  `json:"label"`
+    Score float64 `json:"score"`
+}
+
+type SimilarityResult struct {
+    Similarity float64 `json:"similarity"`
 }
