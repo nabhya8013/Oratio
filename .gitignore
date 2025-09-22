@@ -1,0 +1,3 @@
+/python_services/analyze_ser_service/wav2vec2_checkpoints/models--facebook--wav2vec2-base
+*.wav
+*.pyc
