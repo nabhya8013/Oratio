@@ -1,0 +1,9 @@
+fastapi
+pydantic
+speechbrain
+torch
+torchaudio
+parselmouth
+numpy
+sentence_transformers
+uvicorn

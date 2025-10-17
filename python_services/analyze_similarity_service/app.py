@@ -1,4 +1,3 @@
-# analyze_similarity_service/app.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer, util
