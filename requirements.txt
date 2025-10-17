@@ -1,9 +1,21 @@
+# Web Framework
 fastapi
+uvicorn[standard]
+python-multipart
+
+# Data Validation
 pydantic
+
+# Speech & Audio Processing
 speechbrain
 torch
 torchaudio
+soundfile
 parselmouth
 numpy
-sentence_transformers
-uvicorn
+
+# Text Processing
+sentence-transformers
+
+# Utilities
+requests
