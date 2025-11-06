@@ -1,21 +1,10 @@
-# Web Framework
+# PyTorch CPU (installed separately)
 fastapi
-uvicorn[standard]
-python-multipart
-
-# Data Validation
+uvicorn
 pydantic
-
-# Speech & Audio Processing
-speechbrain
-torch
-torchaudio
-soundfile
-parselmouth
 numpy
-
-# Text Processing
-sentence-transformers
-
-# Utilities
-requests
+scipy
+praat-parselmouth==0.4.3
+librosa
+soundfile
+speechbrain==1.0.0
