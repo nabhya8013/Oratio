@@ -2,3 +2,9 @@
 *.wav
 *.pyc
 /models/emotion-recognition
+/python_services/analyze_ser_service/pretrained_models
+*.ckpt
+*.yaml
+*.safetensors
+*.json
+/python_services/wav2vec2_checkpoints
