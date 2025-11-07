@@ -8,3 +8,4 @@
 *.safetensors
 *.json
 /python_services/wav2vec2_checkpoints
+/wav2vec2_checkpoints

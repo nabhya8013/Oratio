@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"Oratio/models"
-	"Oratio/services"
+	"Oratio/PreSpeechLayer/models"
+	"Oratio/PreSpeechLayer/services"
 	"encoding/json"
 
 	"github.com/gin-gonic/gin"

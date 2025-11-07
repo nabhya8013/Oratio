@@ -1,16 +1,14 @@
-module Oratio
+module Oratio/PreSpeechLayer
 
-go 1.23
-
-toolchain go1.23.11
+go 1.25.4
 
 require (
-	github.com/gin-gonic/gin v1.10.1
+	github.com/gin-gonic/gin v1.10.0
 	github.com/joho/godotenv v1.5.1
-	google.golang.org/genai v1.17.0
-	gorm.io/datatypes v1.2.6
-	gorm.io/driver/postgres v1.6.0
-	gorm.io/gorm v1.30.1
+	google.golang.org/genai v1.34.0
+	gorm.io/datatypes v1.2.7
+	gorm.io/driver/postgres v1.5.7
+	gorm.io/gorm v1.30.0
 )
 
 require (
